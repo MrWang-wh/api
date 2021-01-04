@@ -45,11 +45,11 @@ public class HistoryControllerImpl implements IHistoryController {
                 Token tokenCheck = TokenUtil.checkToken(token, TokenUtil.TokenUssage.DEFAULT);
                 User user = userService.findUserById(tokenCheck.getUserId());
                 if (user == null) {
-                    throw new TokenUtil.TokenNotFound("用户不存在");
+                    throw new TokenUtil.TokenNotFound("user not found");
                 }
                 Video video = videoService.findVideoById(history.getVideoId());
                 if (video == null) {
-                    result.put("msg", "视频 id 不正确");
+                    result.put("msg", "videoid error");
                     break;
                 }
                 //ZonedDateTime time=LocalDate.now();
@@ -63,7 +63,7 @@ public class HistoryControllerImpl implements IHistoryController {
                     historyService.addhistory(history);
                     result.put("status","success");
                 } catch (Exception e) {
-                    result.put("msg", "未知错误");
+                    result.put("msg", "unknown error");
                 }
             } while (false);
         } catch (TokenUtil.TokenExpired | TokenUtil.TokenNotFound | TokenUtil.TokenOverAuthed | TokenUtil.TokenUssageNotMatched tokenError) {
@@ -98,18 +98,18 @@ public class HistoryControllerImpl implements IHistoryController {
             History history = historyService.findHistoryById(id);
             do {
                 if (history == null) {
-                    result.put("msg", "没有该历史记录");
+                    result.put("msg", "no record found");
                     break;
                 } else if (user == null) {
-                    throw new TokenUtil.TokenNotFound("用户不存在");
+                    throw new TokenUtil.TokenNotFound("user not found");
                 } else if (!user.getId().equals(history.getUserId())) {
-                    throw new TokenUtil.TokenNotFound("非本人操作，拒绝授权");
+                    throw new TokenUtil.TokenNotFound("Unauthorized operation, refusal of authorization");
                 }
                 try {
                     historyService.deleteHistory(id);
                     result.put("status", "success");
                 } catch (Exception e) {
-                    result.put("msg", "未知错误");
+                    result.put("msg", "unknown error");
                 }
             } while (false);
         }catch (TokenUtil.TokenExpired | TokenUtil.TokenNotFound | TokenUtil.TokenOverAuthed | TokenUtil.TokenUssageNotMatched tokenError) {

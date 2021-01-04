@@ -6,25 +6,39 @@
         <id column="history_id" property="historyId" />
         <result column="user_id" property="userId" />
         <result column="video_id" property="videoId" />
-        <result column="watch_time" property="watchTime" />
+        <!--<result column="watch_time" property="watchTime" />-->
     </resultMap>
+
+
+
     <insert id="insert" parameterType="cilicili.jz2.pojo.History">
-    insert into History (user_id,video_id,watch_time)
-    values (#{userId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER},#{watchTime,jdbcType=TIMESTAMP}
+    insert into History (user_id,video_id)
+    values (#{userId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}
       )
   </insert>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from history
-    where id = #{id,jdbcType=INTEGER}
+    where history_id = #{id,jdbcType=INTEGER}
   </delete>
 
     <select id="findById" resultMap="BaseResultMap">
     SELECT *
     FROM history
-    WHERE a.id = #{id}
+    WHERE history_id = #{id}
   </select>
-
+    <select id="showhistorys" resultType="cilicili.jz2.pojo.Video">
+    SELECT *
+    FROM videos AS a
+      JOIN
+      (SELECT
+         user_id,
+         video_id
+       FROM history) AS b
+        ON a.id = b.video_id
+    WHERE b.user_id = #{userId}
+    ORDER BY a.id DESC
+  </select>
 
 
 </mapper>
