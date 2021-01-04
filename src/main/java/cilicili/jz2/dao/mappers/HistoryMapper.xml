@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cilicili.jz2.dao.HistoryMapper">
+
+    <resultMap id="BaseResultMap" type="cilicili.jz2.pojo.History">
+        <id column="history_id" property="historyId" />
+        <result column="user_id" property="userId" />
+        <result column="video_id" property="videoId" />
+        <result column="watch_time" property="watchTime" />
+    </resultMap>
+    <insert id="insert" parameterType="cilicili.jz2.pojo.History">
+    insert into History (user_id,video_id,watch_time)
+    values (#{userId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER},#{watchTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from history
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <select id="findById" resultMap="BaseResultMap">
+    SELECT *
+    FROM history
+    WHERE a.id = #{id}
+  </select>
+
+
+
+</mapper>
