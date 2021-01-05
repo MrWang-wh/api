@@ -8,7 +8,19 @@
         <result column="video_id" property="videoId" />
         <!--<result column="watch_time" property="watchTime" />-->
     </resultMap>
-
+    <resultMap id="BaseResultMap1" type="cilicili.jz2.pojo.Video">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="upload_userid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="upload_time" javaType="java.time.ZonedDateTime" jdbcType="TIMESTAMP" />
+            <arg column="count_play" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="count_like" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="pic_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
 
 
     <insert id="insert" parameterType="cilicili.jz2.pojo.History">
@@ -27,7 +39,7 @@
     FROM history
     WHERE history_id = #{id}
   </select>
-    <select id="showhistorys" resultType="cilicili.jz2.pojo.Video">
+    <select id="showhistorys" resultMap="BaseResultMap1">
     SELECT *
     FROM videos AS a
       JOIN
@@ -40,7 +52,7 @@
     ORDER BY a.id DESC
   </select>
 
-    <select id="eq" resultType="cilicili.jz2.pojo.History">
+    <select id="eq" resultMap="BaseResultMap">
     SELECT *
     FROM history
     WHERE user_id = #{userId} AND video_id = #{videoId}
