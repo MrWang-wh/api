@@ -12,16 +12,5 @@
     values (#{userId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}
       )
   </insert>
-    <select id="showcollections" resultMap="BaseResultMap">
-    SELECT *
-    FROM videos AS a
-      JOIN
-      (SELECT
-         user_id,
-         video_id
-       FROM collection) AS b
-        ON a.id = b.video_id
-    WHERE b.user_id = #{userId}
-    ORDER BY a.id DESC
-  </select>
+
 </mapper>
