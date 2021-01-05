@@ -40,5 +40,11 @@
     ORDER BY a.id DESC
   </select>
 
+    <select id="eq" resultType="cilicili.jz2.pojo.History">
+    SELECT *
+    FROM history
+    WHERE user_id = #{userId} AND video_id = #{videoId}
+    </select>
+
 
 </mapper>

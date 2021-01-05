@@ -52,11 +52,10 @@ public class HistoryControllerImpl implements IHistoryController {
                     result.put("msg", "videoid error");
                     break;
                 }
-                //ZonedDateTime time=LocalDate.now();
 
                 //history.setWatchTime(time);
                 history.setHistoryId(null);
-                history.setWatchTime(ZonedDateTime.now());
+                //history.setWatchTime(ZonedDateTime.now());
                 history.setUserId(user.getId());
                 history.setVideoId(video.getId());
                 try {

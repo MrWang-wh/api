@@ -15,7 +15,7 @@ public class History implements Serializable{
 
     private Integer videoId;
 
-    private ZonedDateTime watchTime;
+    //private ZonedDateTime watchTime;
 
 
     public Integer getHistoryId() {
@@ -42,13 +42,13 @@ public class History implements Serializable{
         this.videoId = videoId;
     }
 
-    public ZonedDateTime getWatchTime() {
+    /*public ZonedDateTime getWatchTime() {
         return watchTime;
     }
 
     public void setWatchTime(ZonedDateTime watchTime) {
         this.watchTime = watchTime;
-    }
+    }*/
 
 
     @Override
@@ -57,7 +57,7 @@ public class History implements Serializable{
                 "historyId=" + historyId +
                 ", userId=" + userId +
                 ", videoId=" + videoId +
-                ", watchTime=" + watchTime +
+                //", watchTime=" + watchTime +
                 "}";
     }
 }

@@ -14,6 +14,7 @@ public interface HistoryMapper {
     int insert(History history);
     int deleteByPrimaryKey(Integer id);
     History findById(@Param ("id") Integer id);
+    History eq(@Param("userId") Integer userId,@Param("videoId") Integer videoId);
 
     List<Video> showhistorys(@Param("userId") Integer userId);
 }
