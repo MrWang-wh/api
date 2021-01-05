@@ -23,9 +23,11 @@ public class HistoryServiceImpl implements IHistoryService {
     @Override
     public void addhistory(History history) {
         History history1 = historyMapper.eq(history.getUserId(),history.getVideoId());
+        System.out.println(history1+"11111111111111111111111111111111111111111111111111111111111111111111");
         if(history1 == null){
             historyMapper.insert(history);
         }
+
 
 
     }
